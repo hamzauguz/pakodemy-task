@@ -20,6 +20,8 @@ const Home = () => {
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
 
+  const [filterClick, setFilterClick] = useState(false);
+
   useEffect(() => {
     if (masterDataSource.length === 0) {
       setFilteredDataSource(movies);
@@ -35,6 +37,7 @@ const Home = () => {
     if (search === '') {
       setMasterDataSource(movies);
       setFilteredDataSource(movies);
+      setFilterClick(false);
     }
   }, [masterDataSource]);
   console.log('movies:', movies);
@@ -74,6 +77,7 @@ const Home = () => {
     } else {
       setFilteredDataSource(masterDataSource);
       setSearch(text);
+      setFilterClick(false);
     }
   };
 
@@ -84,6 +88,7 @@ const Home = () => {
         onChangeText={text => {
           searchFilterFunction(text);
         }}
+        searchPress={() => search && setFilterClick(true)}
         /*
         controls={FilterData.map((FilterData, key) => {
           return (
@@ -98,7 +103,7 @@ const Home = () => {
       />
       <View style={styles.listPlace}>
         <FlatList
-          data={filteredDataSource}
+          data={filterClick && filteredDataSource}
           keyExtractor={item => item.id.toString()}
           renderItem={({item}) => {
             const IMAGE_URL =
@@ -118,6 +123,17 @@ const Home = () => {
             );
           }}
           showsVerticalScrollIndicator={false}
+          ListEmptyComponent={() => (
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={{fontSize: 20, fontWeight: '600'}}>
+                Please Search Movies
+              </Text>
+            </View>
+          )}
         />
       </View>
     </View>

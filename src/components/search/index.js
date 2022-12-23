@@ -9,7 +9,7 @@ import React, {useState} from 'react';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const Search = ({value, onChangeText, onPress, controls}) => {
+const Search = ({value, onChangeText, onPress, controls, searchPress}) => {
   const [open, setOpen] = useState(false);
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const {width, height} = Dimensions.get('window');
@@ -36,7 +36,7 @@ const Search = ({value, onChangeText, onPress, controls}) => {
           />
         </View>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={searchPress}>
           <Icon
             style={styles.filtericon}
             name="filter-sharp"
