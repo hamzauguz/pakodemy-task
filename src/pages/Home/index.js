@@ -1,4 +1,4 @@
-import {FlatList, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, RefreshControl, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Card from '../../components/card';
 import {getMovies, addFavorite, removeFavorite} from '../../redux/actions';
@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {styles} from './styles';
 import Search from '../../components/search';
+import Lottie from 'lottie-react-native';
 
 const Home = () => {
   const navigation = useNavigation();
@@ -21,6 +22,20 @@ const Home = () => {
   const [masterDataSource, setMasterDataSource] = useState([]);
 
   const [filterClick, setFilterClick] = useState(false);
+  const [openLottie, setOpenLottie] = useState(false);
+
+  const [refresh, setRefresh] = useState(false);
+
+  const pullMe = () => {
+    setRefresh(true);
+
+    setTimeout(() => {
+      setRefresh(false);
+      setSearch('');
+      setMasterDataSource('');
+      setFilteredDataSource('');
+    }, 1500);
+  };
 
   useEffect(() => {
     if (masterDataSource.length === 0) {
@@ -40,6 +55,7 @@ const Home = () => {
       setFilterClick(false);
     }
   }, [masterDataSource]);
+
   console.log('movies:', movies);
 
   useEffect(() => {
@@ -88,21 +104,21 @@ const Home = () => {
         onChangeText={text => {
           searchFilterFunction(text);
         }}
-        searchPress={() => search && setFilterClick(true)}
-        /*
-        controls={FilterData.map((FilterData, key) => {
-          return (
-            <View key={key} style={styles.checkView}>
-              <CheckBox
-                onValueChange={e => handleChange(FilterData.category_name, e)}
-              />
-              <Text style={styles.textStyle}> {FilterData.category_name}</Text>
-            </View>
-          );
-        })}*/
+        searchPress={() => {
+          if (search) {
+            setOpenLottie(true);
+            setTimeout(() => {
+              setOpenLottie(false);
+              setFilterClick(true);
+            }, 1000);
+          }
+        }}
       />
       <View style={styles.listPlace}>
         <FlatList
+          refreshControl={
+            <RefreshControl refreshing={refresh} onRefresh={() => pullMe()} />
+          }
           data={filterClick && filteredDataSource}
           keyExtractor={item => item.id.toString()}
           renderItem={({item}) => {
@@ -110,6 +126,7 @@ const Home = () => {
               'https://image.tmdb.org/t/p/w185' + item.poster_path;
             return (
               <Card
+                cardPress={() => navigation.navigate('Detail', {item})}
                 IMAGE_URL={IMAGE_URL}
                 title={item.title}
                 vote_count={item.vote_count}
@@ -132,6 +149,19 @@ const Home = () => {
               <Text style={{fontSize: 20, fontWeight: '600'}}>
                 Please Search Movies
               </Text>
+              {openLottie && (
+                <Lottie
+                  style={{
+                    width: 200,
+                    height: 200,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  source={require('../../assets/lottie/loading.json')}
+                  autoPlay
+                  loop
+                />
+              )}
             </View>
           )}
         />

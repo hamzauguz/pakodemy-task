@@ -3,9 +3,9 @@ import React from 'react';
 import {styles} from './styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const Card = ({title, IMAGE_URL, vote_count, onPress, exists}) => {
+const Card = ({title, IMAGE_URL, vote_count, onPress, exists, cardPress}) => {
   return (
-    <View style={styles.main}>
+    <TouchableOpacity onPress={cardPress} style={styles.main}>
       <View style={styles.firstPlace}>
         <Image
           source={{
@@ -30,7 +30,7 @@ const Card = ({title, IMAGE_URL, vote_count, onPress, exists}) => {
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
