@@ -4,6 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import {removeFavorite} from '../../redux/actions';
+import {styles} from './styles';
 
 const Favorites = () => {
   const {favorites} = useSelector(state => state.moviesReducer);
@@ -14,13 +15,11 @@ const Favorites = () => {
   };
 
   return (
-    <View style={{flex: 1, marginTop: 44, paddingHorizontal: 20}}>
-      <Text style={{fontSize: 22}}>Favorites</Text>
-      <View style={{flex: 1, marginTop: 8}}>
+    <View style={styles.mainContainer}>
+      <Text style={styles.fs}>Favorites</Text>
+      <View style={styles.flength}>
         {favorites.length === 0 ? (
-          <Text style={{color: '#010101', fontSize: 18}}>
-            Add a movie to the list.
-          </Text>
+          <Text style={styles.addMovie}>Add a movie to the list.</Text>
         ) : (
           <FlatList
             data={favorites}
@@ -31,53 +30,30 @@ const Favorites = () => {
                 'https://image.tmdb.org/t/p/w185' + item.poster_path;
 
               return (
-                <View style={{marginVertical: 12}}>
-                  <View style={{flexDirection: 'row', flex: 1}}>
+                <View style={styles.mv}>
+                  <View style={styles.secondmv}>
                     <Image
                       source={{
                         uri: IMAGE_URL,
                       }}
                       resizeMode="cover"
-                      style={{width: 100, height: 150, borderRadius: 10}}
+                      style={styles.imageStyle}
                     />
-                    <View style={{flex: 1, marginLeft: 12}}>
+                    <View style={styles.tPlace}>
                       <View>
-                        <Text style={{fontSize: 22, paddingRight: 16}}>
-                          {item.title}
-                        </Text>
+                        <Text style={styles.titlePlace}>{item.title}</Text>
                       </View>
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          marginTop: 10,
-                          alignItems: 'center',
-                        }}>
+                      <View style={styles.votecountView}>
                         <MaterialIcons
                           color="green"
                           name="thumb-up"
                           size={32}
                         />
-                        <Text
-                          style={{
-                            fontSize: 18,
-                            paddingLeft: 10,
-                            color: '#64676D',
-                          }}>
-                          {item.vote_count}
-                        </Text>
+                        <Text style={styles.votecount}>{item.vote_count}</Text>
                         <TouchableOpacity
                           onPress={() => handleRemoveFavorite(item)}
                           activeOpacity={0.7}
-                          style={{
-                            marginLeft: 14,
-                            flexDirection: 'row',
-                            padding: 2,
-                            borderRadius: 20,
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            height: 40,
-                            width: 40,
-                          }}>
+                          style={styles.removeItem}>
                           <MaterialIcons
                             color="orange"
                             size={32}

@@ -148,27 +148,16 @@ const Home = () => {
           }}
           showsVerticalScrollIndicator={false}
           ListEmptyComponent={() => (
-            <View
-              style={{
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
+            <View style={styles.emptyView}>
               {openLottie ? (
                 <Lottie
-                  style={{
-                    width: 200,
-                    height: 200,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
+                  style={styles.lottieStyle}
                   source={require('../../assets/lottie/loading.json')}
                   autoPlay
                   loop
                 />
               ) : (
-                <Text style={{fontSize: 20, fontWeight: '600'}}>
-                  Please Search Movies
-                </Text>
+                <Text style={styles.searchText}>Please Search Movies</Text>
               )}
             </View>
           )}

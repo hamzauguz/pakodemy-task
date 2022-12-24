@@ -23,7 +23,7 @@ const tabBarOptions = {
 
 const NavTab = () => {
   return (
-    <Tab.Navigator tabBarOptions={tabBarOptions}>
+    <Tab.Navigator screenOptions={tabBarOptions}>
       <Tab.Screen
         name="Home"
         component={Home}
@@ -51,7 +51,7 @@ const RootNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Home"
+          name="Homes"
           options={() => ({
             headerShown: false,
           })}

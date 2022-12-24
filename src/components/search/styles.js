@@ -49,6 +49,11 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     borderRadius: 5,
   },
+  secondContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
 export default styles;
