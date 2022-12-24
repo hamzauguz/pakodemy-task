@@ -34,7 +34,7 @@ const Home = () => {
       setSearch('');
       setMasterDataSource('');
       setFilteredDataSource('');
-    }, 1500);
+    }, 1000);
   };
 
   useEffect(() => {
@@ -126,7 +126,14 @@ const Home = () => {
               'https://image.tmdb.org/t/p/w185' + item.poster_path;
             return (
               <Card
-                cardPress={() => navigation.navigate('Detail', {item})}
+                cardPress={() => {
+                  setOpenLottie(true);
+                  setFilterClick(false);
+                  setTimeout(() => {
+                    navigation.navigate('Detail', {item});
+                    setOpenLottie(false);
+                  }, 1000);
+                }}
                 IMAGE_URL={IMAGE_URL}
                 title={item.title}
                 vote_count={item.vote_count}
@@ -146,10 +153,7 @@ const Home = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              <Text style={{fontSize: 20, fontWeight: '600'}}>
-                Please Search Movies
-              </Text>
-              {openLottie && (
+              {openLottie ? (
                 <Lottie
                   style={{
                     width: 200,
@@ -161,6 +165,10 @@ const Home = () => {
                   autoPlay
                   loop
                 />
+              ) : (
+                <Text style={{fontSize: 20, fontWeight: '600'}}>
+                  Please Search Movies
+                </Text>
               )}
             </View>
           )}
