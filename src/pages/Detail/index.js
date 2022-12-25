@@ -22,9 +22,6 @@ const Detail = props => {
         <ScrollView>
           <View style={styles.titlePlace}>
             <Text style={styles.titleText}>{showData.title}</Text>
-            <Text style={styles.titleText}>
-              {width} {height}
-            </Text>
           </View>
           <View style={styles.secondPlace}>
             <View>

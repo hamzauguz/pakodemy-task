@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   firstPlace: {flexDirection: 'row', flex: 1},
   imageStyle: {width: 100, height: 150, borderRadius: 10},
   stringPlace: {flex: 1, marginLeft: 12},
-  title: {fontSize: 22, paddingRight: 16},
+  title: {fontSize: 22, paddingRight: 16, color: 'black'},
   iconPlace: {
     flexDirection: 'row',
     marginTop: 10,
