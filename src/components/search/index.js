@@ -1,26 +1,14 @@
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Dimensions,
-} from 'react-native';
+import {View, TextInput, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const Search = ({value, onChangeText, onPress, controls, searchPress}) => {
   const [open, setOpen] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const {width, height} = Dimensions.get('window');
+
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
+      <View style={styles.secondContainer}>
         <View style={styles.searchSection}>
           <Icon
             style={styles.searchIcon}
