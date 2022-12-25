@@ -1,10 +1,12 @@
-import {StyleSheet} from 'react-native';
+import {Dimensions, Platform, StyleSheet} from 'react-native';
+const {width, height} = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   mainContainer: {flex: 1, backgroundColor: 'black'},
   flex: {flex: 1},
   titlePlace: {
-    height: 100,
+    height: Platform.OS === 'ios' ? height / 8.44 : height / 6.83,
+
     alignItems: 'center',
     justifyContent: 'center',
   },

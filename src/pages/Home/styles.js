@@ -1,4 +1,5 @@
-import {StyleSheet} from 'react-native';
+import {Dimensions, Platform, StyleSheet} from 'react-native';
+const {width, height} = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   mainPlace: {flex: 1, paddingHorizontal: 20},
@@ -8,8 +9,10 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   lottieStyle: {
-    width: 200,
-    height: 200,
+    width: Platform.OS === 'ios' ? width / 1.95 : width / 3.4,
+
+    height: Platform.OS === 'ios' ? height / 4.22 : height / 3.4,
+
     alignItems: 'center',
     justifyContent: 'center',
   },

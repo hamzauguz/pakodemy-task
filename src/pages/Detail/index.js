@@ -1,4 +1,4 @@
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, Dimensions} from 'react-native';
 import React from 'react';
 import {styles} from './styles';
 import AnimatedHeader from 'react-native-animated-header';
@@ -7,6 +7,9 @@ const Detail = props => {
   const showData = props?.route.params.item;
   console.log('showdata:', showData);
   const IMAGE_URL = 'https://image.tmdb.org/t/p/w185' + showData?.poster_path;
+  const {width, height} = Dimensions.get('window');
+
+  console.log(width, height);
 
   return (
     <View style={styles.mainContainer}>
@@ -19,6 +22,9 @@ const Detail = props => {
         <ScrollView>
           <View style={styles.titlePlace}>
             <Text style={styles.titleText}>{showData.title}</Text>
+            <Text style={styles.titleText}>
+              {width} {height}
+            </Text>
           </View>
           <View style={styles.secondPlace}>
             <View>
